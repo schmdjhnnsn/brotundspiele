@@ -46,8 +46,8 @@
 </style>
 </head>
 <body>
-<p>Willkommen bei Brot und Spiele</p>
-<h1>Seit Expert*in für einen Tag</h1>
+
+<h1>Expert*in für einen Tag</h1>
 <p>Bitte drücke den Button, um einen passenden Beruf für Dich zu finden:</p>
 <button id="berufButton">Finde deinen Beruf</button>
 <div id="beruf">Dein Beruf erscheint hier...</div>
@@ -75,19 +75,20 @@ const berufe = [
 document.getElementById('berufButton').addEventListener('click', function() {
     const berufElement = document.getElementById('beruf');
     let i = 0;
+    const maxIterations = berufe.length * 3; // Drei Durchläufe durch das Array
     const interval = setInterval(() => {
-        if (i < berufe.length) {
-            berufElement.textContent = berufe[i++];
-            berufElement.style.animation = 'none';
-            // Trigger reflow to reset animation
-            void berufElement.offsetWidth;
-            berufElement.style.animation = 'flip 0.5s';
-        } else {
+        berufElement.textContent = berufe[i++ % berufe.length];
+        berufElement.style.animation = 'flip 0.5s';
+        
+        if (i >= maxIterations) {
             clearInterval(interval);
-            berufElement.textContent = berufe[Math.floor(Math.random() * berufe.length)];
-            berufElement.style.animation = 'none';
+            // Auswahl eines zufälligen Berufs nach der Animation
+            setTimeout(() => {
+                berufElement.textContent = berufe[Math.floor(Math.random() * berufe.length)];
+                berufElement.style.animation = 'none';
+            }, 500);
         }
-    }, 500);
+    }, 150);
 });
 </script>
 
