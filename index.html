@@ -3,6 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Expert*in für einen Tag</title>
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    #beruf {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
 <script>
 // Liste von erfundenen Berufen
 const berufe = [
@@ -34,8 +67,9 @@ function zeigeBeruf() {
 <body>
 
 <h1>Expert*in für einen Tag</h1>
-<button onclick="zeigeBeruf()">Zeige mir einen Beruf!</button>
-<p id="beruf">Klicke auf den Button, um einen Beruf zu enthüllen.</p>
+<p>Bitte drücke den Button, um einen passenden Beruf für Dich zu finden:</p>
+<button onclick="zeigeBeruf()">Finde deinen Beruf</button>
+<p id="beruf">Dein Beruf erscheint hier...</p>
 
 </body>
 </html>
