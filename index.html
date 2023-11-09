@@ -34,50 +34,65 @@
         margin-top: 20px;
         font-size: 20px;
         font-weight: bold;
-        overflow: hidden; /* Ensure the content does not overflow */
+        height: 30px; /* Fixed height for the flipping effect */
+        overflow: hidden; /* Hide the overflow */
     }
 
-    .animation {
-        animation: scroll 1s ease-in-out forwards;
-    }
-
-    @keyframes scroll {
-        0% { transform: translateY(100%); }
-        100% { transform: translateY(0); }
+    /* Animation */
+    @keyframes flip {
+        0% { margin-top: -30px; }
+        100% { margin-top: 0; }
     }
 </style>
 <script>
 // Liste von erfundenen Berufen
 const berufe = [
-    // ... (hier kommen Ihre Berufe hin, wie im vorherigen Beispiel) ...
+    "Experte für Unterwasser-Butterbrot-Schmierung",
+    "Fachfrau für akustisches Design von Gummienten",
+    "Berater für eskimotische Sonnencreme-Anwendung",
+    "Spezialist für antigravitative Teekessel"
+    "Spezialist für antigravitative Teekessel",
+    "Direktor für interplanetare Postzustellung",
+    "Chefberater für Zeitreisen-Etikette",
+    "Guru für virtuelle Realitätslandwirtschaft",
+    "Leiter der Abteilung für Wolkenkratzer-Gärtnerei",
+    "Innovationsbeauftragter für Nullschwerkraft-Yoga",
+    "Koordinator für subaquatische Verkehrsnetze",
+    "Spezialist für holographische Haustierentwicklung",
+    "Senior-Entwickler für intelligente Toaster-Netzwerke",
+    "Meisterkonservator für digitale Kunstarchivierung",
+    "Chefingenieur für unterirdisches Städtebauwesen",
+    "Diplom-Piratenschatz-Kartograph"
 ];
 
-// Funktion zum Aufdecken eines Berufs
 function zeigeBeruf() {
     const berufElement = document.getElementById("beruf");
-    berufElement.textContent = ""; // Clear previous content
-    berufElement.classList.remove("animation"); // Reset animation if needed
-
-    // Starte die "Slot Machine" Animation
     let i = 0;
-    const interval = setInterval(function() {
-        berufElement.textContent = berufe[i++ % berufe.length];
-        berufElement.classList.add("animation");
-
-        // Nachdem alle Berufe einmal durchlaufen wurden, wähle einen aus
-        if (i >= berufe.length) {
+    const interval = setInterval(() => {
+        berufElement.style.opacity = '0';
+        setTimeout(() => {
+            berufElement.textContent = berufe[i++ % berufe.length];
+            berufElement.style.opacity = '1';
+            berufElement.style.animation = 'none';
+            // Trigger reflow to reset animation
+            void berufElement.offsetWidth;
+            berufElement.style.animation = 'flip 0.5s';
+        }, 250);
+        
+        if (i === berufe.length) {
             clearInterval(interval);
-            setTimeout(function() {
+            setTimeout(() => {
                 berufElement.textContent = berufe[Math.floor(Math.random() * berufe.length)];
-            }, 1000); // Warte für die letzte Animation, bevor der finale Beruf gezeigt wird
+                berufElement.style.animation = 'none';
+            }, 500);
         }
-    }, 100);
+    }, 500);
 }
 </script>
 </head>
 <body>
-<p>Willkommen bei Brot und Spiele</p>
-<h1>Sei Expert*in für einen Tag!</h1>
+
+<h1>Expert*in für einen Tag</h1>
 <p>Bitte drücke den Button, um einen passenden Beruf für Dich zu finden:</p>
 <button onclick="zeigeBeruf()">Finde deinen Beruf</button>
 <div id="beruf">Dein Beruf erscheint hier...</div>
