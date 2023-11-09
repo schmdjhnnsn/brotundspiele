@@ -78,7 +78,7 @@ document.getElementById('berufButton').addEventListener('click', function() {
     const maxIterations = berufe.length * 3; // Drei Durchläufe durch das Array
     const interval = setInterval(() => {
         berufElement.textContent = berufe[i++ % berufe.length];
-        berufElement.style.animation = 'flip 0.5s';
+        berufElement.style.animation = 'flip 0.1s';
         
         if (i >= maxIterations) {
             clearInterval(interval);
