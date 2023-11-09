@@ -44,6 +44,14 @@
         100% { margin-top: 0; }
     }
 </style>
+</head>
+<body>
+<p>Willkommen bei Brot und Spiele</p>
+<h1>Seit Expert*in für einen Tag</h1>
+<p>Bitte drücke den Button, um einen passenden Beruf für Dich zu finden:</p>
+<button id="berufButton">Finde deinen Beruf</button>
+<div id="beruf">Dein Beruf erscheint hier...</div>
+
 <script>
 // Liste von erfundenen Berufen
 const berufe = [
@@ -65,37 +73,24 @@ const berufe = [
     "Diplom-Piratenschatz-Kartograph"
 ];
 
-function zeigeBeruf() {
-    const berufElement = document.getElementById("beruf");
+document.getElementById('berufButton').addEventListener('click', function() {
+    const berufElement = document.getElementById('beruf');
     let i = 0;
     const interval = setInterval(() => {
-        berufElement.style.opacity = '0';
-        setTimeout(() => {
-            berufElement.textContent = berufe[i++ % berufe.length];
-            berufElement.style.opacity = '1';
+        if (i < berufe.length) {
+            berufElement.textContent = berufe[i++];
             berufElement.style.animation = 'none';
             // Trigger reflow to reset animation
             void berufElement.offsetWidth;
             berufElement.style.animation = 'flip 0.5s';
-        }, 250);
-        
-        if (i === berufe.length) {
+        } else {
             clearInterval(interval);
-            setTimeout(() => {
-                berufElement.textContent = berufe[Math.floor(Math.random() * berufe.length)];
-                berufElement.style.animation = 'none';
-            }, 500);
+            berufElement.textContent = berufe[Math.floor(Math.random() * berufe.length)];
+            berufElement.style.animation = 'none';
         }
     }, 500);
-}
+});
 </script>
-</head>
-<body>
-
-<h1>Expert*in für einen Tag</h1>
-<p>Bitte drücke den Button, um einen passenden Beruf für Dich zu finden:</p>
-<button onclick="zeigeBeruf()">Finde deinen Beruf</button>
-<div id="beruf">Dein Beruf erscheint hier...</div>
 
 </body>
 </html>
